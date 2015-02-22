@@ -3,9 +3,12 @@ html(lang='en')
 	head
 		meta(charset='utf-8')
 		meta(name='viewport', content='width=device-width, initial-scale=1')
-		title Kanamond
+		title Kanamond glyph typeset test page
 		link(href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css", rel="stylesheet")
 		style.
+			h2 {
+				clear: both;
+			}
 			.glyphs-container {
 				width: 100%;
 			}
@@ -25,11 +28,14 @@ html(lang='en')
 			}
 	body
 		div.container
-			h1 Kanamond Typeset glyph test page
+			h1 Kanamond glyph typeset test page
 			each glyphs, type in glyphset
 				h2= type
 				div.glyphs-container
 					each glyph in glyphs
-						div.glyph-container
-							img.glyph-img(src=type + '/' + glyph + '.svg')
-							div.glyph-label= glyph
+						- var char = String.fromCharCode(glyph);
+						- var glyphname = 'u' + ('000' + glyph.toString(16)).slice(-4);
+						- var imgpath = type + '/' + glyphname + '.svg';
+						a.glyph-container(href=imgpath)
+							img.glyph-img(src=imgpath)
+							div.glyph-label= glyphname + '(' + char + ')'
